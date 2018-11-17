@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Ecloth</string>
+    <string name="welcome">welcome</string>
+    <string name="login">login</string>
+    <string name="login_btn">登陆</string>
+    <string name="user_name">user name</string>
+    <string name="password">password</string>
+</resources>

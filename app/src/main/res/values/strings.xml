@@ -1,8 +1,19 @@
 <resources>
-    <string name="app_name">Ecloth</string>
+    <string name="app_name">Eloth</string>
     <string name="welcome">welcome</string>
     <string name="login">login</string>
     <string name="login_btn">登陆</string>
     <string name="user_name">user name</string>
     <string name="password">password</string>
+    <string name="phoneLimit">（仅支持中国大陆地区手机号）</string>
+    <string name="passwordHint">请输入密码，不小于6位</string>
+    <string name="phoneHint">请输入你的手机号</string>
+    <string name="usernameHint">请输入用户名,不小于4位</string>
+    <string name="signup">注册</string>
+    <string name="signup_image">signUp image</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">我的衣橱</string>
+    <string name="title_notifications">个人中心</string>
+    <string name="about_home">这里是首页</string>
 </resources>

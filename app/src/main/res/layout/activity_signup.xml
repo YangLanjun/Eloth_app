@@ -6,4 +6,95 @@
     android:layout_height="match_parent"
     tools:context=".SignupActivity">
 
+    <ImageView
+        android:id="@+id/SignUpImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/signup_image"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/signup" />
+
+    <EditText
+        android:id="@+id/USERNAME_TEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/usernameHint"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/SignUpImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SignUpImage"
+        app:layout_constraintVertical_bias="0.45999998" />
+
+    <EditText
+        android:id="@+id/PHONE_TEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/phoneHint"
+        android:inputType="phone"
+        app:layout_constraintBottom_toBottomOf="@+id/SignUpImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SignUpImage"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <EditText
+        android:id="@+id/PWD_SIGNUP_TEXT"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/passwordHint"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/SignUpImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SignUpImage"
+        app:layout_constraintVertical_bias="0.7" />
+
+    <Button
+        android:id="@+id/SIGNUP_SEND_BTN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/shape_radius"
+        android:text="@string/signup"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/SignUpImage"
+        app:layout_constraintVertical_bias="0.83" />
+
+    <TextView
+        android:id="@+id/PHONE_VIEW"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/phoneLimit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.53" />
 </android.support.constraint.ConstraintLayout>

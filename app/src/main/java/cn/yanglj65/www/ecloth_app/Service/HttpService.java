@@ -18,7 +18,7 @@ import cn.yanglj65.www.ecloth_app.Entity.User;
 
 
 public class HttpService {
-    public final static String serverUrl = "http://192.168.137.214:8008/";
+    public final static String serverUrl = "http://192.168.43.93:8008/";
 
     public static Result userSignUp(final  String name, final  String pwd, final  String phone) {
                 String signUpUrl = serverUrl + "user/signup";
@@ -128,4 +128,5 @@ public class HttpService {
                 }
                 return result;
     }
+
 }

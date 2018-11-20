@@ -77,8 +77,12 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
-                AlterUtil.makeAlter(LoginActivity.this, "网络异常，请稍后重试");
-                return;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        AlterUtil.makeAlter(LoginActivity.this, "网络异常，请稍后重试");
+                    }
+                });
             }
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {

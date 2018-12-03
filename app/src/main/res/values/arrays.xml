@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="color">
+        <item>红</item>
+        <item>黄</item>
+        <item>绿</item>
+        <item>蓝</item>
+        <item>紫</item>
+        <item>粉</item>
+        <item>黑</item>
+        <item>白</item>
+        <item>灰</item>
+    </string-array>
+
+    <string-array name="size">
+        <item>XXS</item>
+        <item>XS</item>
+        <item>S</item>
+        <item>M</item>
+        <item>L</item>
+        <item>XL</item>
+        <item>XXL</item>
+        <item>XXXL</item>
+        <item>XXXXL</item>
+    </string-array>
+</resources>

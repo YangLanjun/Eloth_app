@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/welcomeImg"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/welcome"
@@ -16,6 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/welcome" />
+       />
 
 </android.support.constraint.ConstraintLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ClothFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/CLOTH_TYPE_LIST"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="145dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/topText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="25dp"
+        android:background="#deb887"
+        android:drawableLeft="@drawable/wardrobe_top"
+        android:drawablePadding="5dp"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/myWardrobe"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/CLOTH_TYPE_LIST"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textColor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text=""
+        android:padding="0dp"
+        android:background="#8B4513"
+        app:layout_constraintBottom_toTopOf="@+id/CLOTH_TYPE_LIST"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topText" />
+
+</android.support.constraint.ConstraintLayout>

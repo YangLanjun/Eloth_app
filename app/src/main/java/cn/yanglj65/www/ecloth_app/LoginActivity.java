@@ -1,7 +1,8 @@
 package cn.yanglj65.www.ecloth_app;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +10,9 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
-
 import cn.yanglj65.www.ecloth_app.Entity.Result;
 import cn.yanglj65.www.ecloth_app.Service.HttpService;
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
@@ -36,6 +34,13 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//设置底部导航栏栏
+        SharedPreferences sp=getSharedPreferences("login",Context.MODE_PRIVATE);
+       String userNamePreferences=sp.getString("username",null);
+       String passwordPreference=sp.getString("password",null);
+       if(userNamePreferences!=null&&passwordPreference!=null){
+           check(userNamePreferences,passwordPreference);
+           return;
+       }
         UserName = findViewById(R.id.USER_NAME_TEXT);
         Password = findViewById(R.id.PWD_TEXT);
         Button Login = findViewById(R.id.LOGIN_BTN);
@@ -55,14 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private DialogInterface.OnClickListener positiveClick = new DialogInterface.OnClickListener() {
-        @Override
-        public void onClick(DialogInterface arg0, int arg1) {
-            arg0.cancel();
-        }
-    };
-
-    private void check(String userName, String pwd) {
+    private void check(final String userName, final String pwd) {
         String loginUrl = HttpService.serverUrl + "user/login";
         OkHttpClient client = new OkHttpClient();
         FormBody formBody = new FormBody.Builder()
@@ -91,6 +89,10 @@ public class LoginActivity extends AppCompatActivity {
                     JSONObject resultObject=new JSONObject(res);
                     final Result result= JsonUtil.jsonToResult(resultObject);
                     if (result.getMsg().equals("ok")){
+                        SharedPreferences sp=getSharedPreferences("login", Context.MODE_PRIVATE);
+                        sp.edit().putString("username",userName).putString("password",pwd).apply();
+                        JSONObject userObject=resultObject.getJSONObject("data");
+                        JsonUtil.jsonToUser(userObject);
                         final Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
                     }else{

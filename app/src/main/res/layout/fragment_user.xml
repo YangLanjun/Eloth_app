@@ -26,7 +26,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/PERSONINFO_BTN"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -34,13 +34,17 @@
         android:layout_marginTop="20dp"
         android:background="#ffffff"
         android:text="@string/personalInfo"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/in_right"
+        android:drawableLeft="@drawable/person_info"
+        android:drawablePadding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/RECORD_BTN"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -48,28 +52,36 @@
         android:layout_marginTop="20dp"
         android:background="#ffffff"
         android:text="@string/wearRecard"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/in_right"
+        android:drawableLeft="@drawable/record"
+        android:drawablePadding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/PERSONINFO_BTN" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/SCORE_BTN"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="300dp"
         android:background="@drawable/user_btn_border"
         android:text="@string/myScore"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/in_right"
+        android:drawableLeft="@drawable/score"
+        android:drawablePadding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/RECORD_BTN" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/BUGREPORT_BTN"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -77,23 +89,31 @@
         android:layout_marginTop="32dp"
         android:background="#ffffff"
         android:text="@string/bug"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/in_right"
+        android:drawableLeft="@drawable/bug"
+        android:drawablePadding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button8" />
+        app:layout_constraintTop_toBottomOf="@+id/SETTINGS_BTN" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/SETTINGS_BTN"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="250dp"
         android:background="#ffffff"
         android:text="@string/settings"
+        android:textAlignment="textStart"
+        android:drawableRight="@drawable/in_right"
+        android:drawableLeft="@drawable/setting"
+        android:drawablePadding="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/SCORE_BTN" />
 </android.support.constraint.ConstraintLayout>

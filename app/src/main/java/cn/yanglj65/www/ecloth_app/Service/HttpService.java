@@ -1,14 +1,13 @@
 package cn.yanglj65.www.ecloth_app.Service;
 
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,20 +23,19 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import cn.yanglj65.www.ecloth_app.Adapter.MyRecyclerAdapter;
+import cn.yanglj65.www.ecloth_app.Entity.Pants;
 import cn.yanglj65.www.ecloth_app.Entity.Result;
-import cn.yanglj65.www.ecloth_app.Entity.User;
+import cn.yanglj65.www.ecloth_app.Entity.Shoes;
+import cn.yanglj65.www.ecloth_app.Entity.Tops;
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
 import cn.yanglj65.www.ecloth_app.Util.JsonUtil;
 import cn.yanglj65.www.ecloth_app.Util.UserUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -46,9 +44,9 @@ import okhttp3.ResponseBody;
 
 
 public class HttpService {
-    //public final static String serverUrl = "http://192.168.137.214:8008/";
-   // public final static String serverUrl = "http://192.168.43.93:8008/";
-    public final static String serverUrl = "http://192.168.0.109:8008/";
+    public final static String serverUrl = "http://192.168.137.214:8008/";
+    // public final static String serverUrl = "http://192.168.43.93:8008/";
+    //public final static String serverUrl = "http://192.168.0.109:8008/";
 
     public static Result userSignUp(final String name, final String pwd, final String phone) {
         String signUpUrl = serverUrl + "user/signup";
@@ -113,7 +111,7 @@ public class HttpService {
                 // 创建字节输出流对象
                 ByteArrayOutputStream message = new ByteArrayOutputStream();
                 // 定义读取的长度
-                int len = 0;
+                int len;
                 // 定义缓冲区
                 byte buffer[] = new byte[1024];
                 // 按照缓冲区的大小，循环读取
@@ -160,13 +158,13 @@ public class HttpService {
     }
 
     @SuppressLint("CheckResult")
-    public static void okHttpGetCloth(final String url, final Context context, final RecyclerView recyclerView, final List<String> mList){
+    public static void okHttpGetCloth(final String url, final Context context, final RecyclerView recyclerView, final List<String> mList) {
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws IOException {
-                Request request=new Request.Builder().get().url(url).addHeader("Authorization", UserUtil.accessToken).build();
-                final OkHttpClient httpClient=new OkHttpClient();
-                Response response=httpClient.newCall(request).execute();
+                Request request = new Request.Builder().get().url(url).addHeader("Authorization", UserUtil.accessToken).build();
+                final OkHttpClient httpClient = new OkHttpClient();
+                Response response = httpClient.newCall(request).execute();
 //                httpClient.newCall(request).enqueue(new Callback() {
 //                    @Override
 //                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -179,76 +177,98 @@ public class HttpService {
 //                        emitter.onNext(result);
 //                    }
 //                });
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     String result;
-                    if(response.body()!=null){
-                        result=response.body().string();
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        result = body.string();
                         emitter.onNext(result);
-                    }else{
-                        emitter.onNext("网络异常，数据刷新失败");
+                    } else {
+                        emitter.onNext("error");
                     }
-                }else{
-                    emitter.onNext("网络异常，数据刷新失败");
+                } else {
+                    emitter.onNext("error");
                 }
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
             @Override
-            public void accept(String s){
-                AlterUtil.makeAlter(context,s);
-                MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(context, mList);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-                recyclerView.setLayoutManager(linearLayoutManager);
-                recyclerView.setAdapter(myRecyclerAdapter);
+            public void accept(String s) throws JSONException {
+                //AlterUtil.makeAlter(context,s);
+                if (s.equals("error")) {
+                    s = "网络异常，数据刷新失败";
+                    AlterUtil.makeAlter(context, s);
+                } else {
+                    JSONObject resultJson = new JSONObject(s);
+                    Result result = JsonUtil.jsonToResult(resultJson);
+                    if (result.getMsg().equals("ok")) {
+                        List<Tops> tops;
+                        List<Pants> pants;
+                        List<Shoes> shoes;
+                        JSONObject dataObject = resultJson.getJSONObject("data");
+                        JSONArray topsJsonArray = dataObject.getJSONArray("tops");
+                        JSONArray pantsJsonArray = dataObject.getJSONArray("pants");
+                        JSONArray shoesJsonArray = dataObject.getJSONArray("shoes");
+                        tops = JsonUtil.jsonToTopList(topsJsonArray);
+                        pants = JsonUtil.jsonToPantList(pantsJsonArray);
+                        shoes = JsonUtil.jsonToShoesList(shoesJsonArray);
+                        MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(context, mList, tops, pants, shoes);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(myRecyclerAdapter);
+                    } else {
+                        AlterUtil.makeAlter(context, result.getMsg());
+                    }
+                }
             }
         });
     }
 
     @SuppressLint("CheckResult")
-    public static void okHttpAddCloth(final Context context, final String color, final String type, final String size, final boolean usability , final String addClothType, final View view){
+    public static void okHttpAddCloth(final Context context, final String color, final String type, final String size, final boolean usability, final String addClothType, final View view) {
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
-            public void subscribe(final ObservableEmitter<String>emitter) throws IOException {
-                String addUrl=serverUrl+"cloth/add";
-                OkHttpClient httpClient=new OkHttpClient();
-                FormBody formBody=new FormBody.Builder()
-                        .add("color",color)
-                        .add("type",type)
-                        .add("size",size)
-                        .add("usability",String.valueOf(usability))
-                        .add("class",addClothType)
+            public void subscribe(final ObservableEmitter<String> emitter) throws IOException {
+                String addUrl = serverUrl + "cloth/add";
+                OkHttpClient httpClient = new OkHttpClient();
+                FormBody formBody = new FormBody.Builder()
+                        .add("color", color)
+                        .add("type", type)
+                        .add("size", size)
+                        .add("usability", String.valueOf(usability))
+                        .add("class", addClothType)
                         .build();
-                final Request request=new Request.Builder()
+                final Request request = new Request.Builder()
                         .url(addUrl)
                         .post(formBody)
-                        .addHeader("Authorization",UserUtil.accessToken)
+                        .addHeader("Authorization", UserUtil.accessToken)
                         .build();
-                Response response=httpClient.newCall(request).execute();
-                if(response.isSuccessful()){
+                Response response = httpClient.newCall(request).execute();
+                if (response.isSuccessful()) {
                     String result;
                     ResponseBody body = response.body();
-                    if(body !=null){
-                        result= body.string();
+                    if (body != null) {
+                        result = body.string();
                         emitter.onNext(result);
-                    }else{
+                    } else {
                         emitter.onNext("服务器异常，请稍后重试");
                     }
-                }else{
+                } else {
                     emitter.onNext("网络异常，请稍后重试");
                 }
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
             @Override
             public void accept(String s) throws Exception {
-                if(s.equals("服务器异常，请稍后重试")||s.equals("网络异常，请稍后重试")){
-                    AlterUtil.makeAlter(context,s);
-                }else{
-                    JSONObject resultObject=new JSONObject(s);
-                    final Result result= JsonUtil.jsonToResult(resultObject);
-                    if(result.getMsg().equals("ok")){
+                if (s.equals("服务器异常，请稍后重试") || s.equals("网络异常，请稍后重试")) {
+                    AlterUtil.makeAlter(context, s);
+                } else {
+                    JSONObject resultObject = new JSONObject(s);
+                    final Result result = JsonUtil.jsonToResult(resultObject);
+                    if (result.getMsg().equals("ok")) {
                         Snackbar.make(view, "添加衣物成功", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
-                    }else{
-                        AlterUtil.makeAlter(context,"添加失败："+result.getMsg());
+                    } else {
+                        AlterUtil.makeAlter(context, "添加失败：" + result.getMsg());
                     }
                 }
             }

@@ -70,8 +70,17 @@ public class HomeActivity extends AppCompatActivity {
     private void setDefaultFragment() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        homeFragment = new HomeFragment();
-        transaction.replace(R.id.FRAME_LAYOUT, homeFragment);
+        String fragment=getIntent().getStringExtra("fragment");
+        if(fragment==null||fragment.equals("home")){
+            homeFragment = new HomeFragment();
+            transaction.replace(R.id.FRAME_LAYOUT, homeFragment);
+        }else if(fragment.equals("cloth")){
+            clothFragment = new ClothFragment();
+            transaction.replace(R.id.FRAME_LAYOUT, clothFragment);
+        }else{
+            userFragment = new UserFragment();
+            transaction.replace(R.id.FRAME_LAYOUT, userFragment);
+        }
         transaction.commit();
     }
 

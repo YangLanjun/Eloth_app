@@ -19,9 +19,9 @@
     <ImageButton
         android:id="@+id/itemImage1"
         android:scaleType="fitStart"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginLeft="40dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="25dp"
         android:padding="0dp"
         android:src="@drawable/hanger"
@@ -29,22 +29,22 @@
         />
     <ImageButton
         android:id="@+id/itemImage2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:padding="0dp"
         android:scaleType="fitStart"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="30dp"
         android:src="@drawable/hanger"
         android:background="@android:color/transparent"/>
     <ImageButton
         android:id="@+id/itemImage3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:padding="0dp"
         android:scaleType="fitStart"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="40dp"
+        android:layout_marginLeft="30dp"
         android:src="@drawable/hanger"
         android:background="@android:color/transparent"/>
 </LinearLayout>

@@ -23,4 +23,10 @@
         <item>XXXL</item>
         <item>XXXXL</item>
     </string-array>
+
+    <string-array name="font_size">
+        <item>大</item>
+        <item>中</item>
+        <item>小</item>
+    </string-array>
 </resources>

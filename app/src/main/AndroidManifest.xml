@@ -26,7 +26,11 @@
         <activity
             android:name=".AddActivity"
             android:label="@string/title_activity_add"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".PersonInfoActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".BugReportActivity" />
+        <activity android:name=".CommonSettingsActivity"></activity>
     </application>
 
 </manifest>

@@ -15,7 +15,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="?attr/colorAccent"
+            android:background="@color/colorAccent"
             app:popupTheme="@style/AppTheme.PopupOverlay"
             app:title="添加上衣至我的衣库"
             app:titleMarginTop="35dp"/>

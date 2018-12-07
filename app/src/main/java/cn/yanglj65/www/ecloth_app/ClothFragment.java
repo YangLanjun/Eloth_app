@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,10 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import cn.yanglj65.www.ecloth_app.Adapter.MyRecyclerAdapter;
 import cn.yanglj65.www.ecloth_app.Service.HttpService;
+import cn.yanglj65.www.ecloth_app.Util.ClothUtil;
 
 
 /**
@@ -42,7 +46,8 @@ public class ClothFragment extends Fragment {
     private List<String> mList;
     private FloatingActionButton addButton;
     private FloatingActionMenu addButtonMenu;
-private TextView topText;
+    private TextView topText;
+
     public ClothFragment() {
         // Required empty public constructor
     }
@@ -74,40 +79,42 @@ private TextView topText;
         }
         initActionButton();
     }
+
     private void initList() {
         mList = new ArrayList<>();
-        for (int i = 0; i <8; i++) {
+        for (int i = 0; i < 8; i++) {
             mList.add("Cloth " + i);
         }
     }
-    private void initActionButton(){
-        final ImageView addButtonIcon=new ImageView(getActivity());
-        Resources resources=getActivity().getResources();
-        addButtonIcon.setImageDrawable(resources.getDrawable(R.drawable.add,null));
-        addButtonIcon.setScaleType(ImageView.ScaleType.FIT_XY);
-        addButton=new FloatingActionButton.Builder(getActivity()).setContentView(addButtonIcon).build();
-        ((FloatingActionButton.LayoutParams)addButton.getLayoutParams()).setMargins(200,500,30,100);
-        SubActionButton.Builder subAddButtons=new SubActionButton.Builder(getActivity());
-        final ImageView subButtonImg1=new ImageView(getActivity());
-        final ImageView subButtonImg2=new ImageView(getActivity());
-        final ImageView subButtonImg3=new ImageView(getActivity());
-        final ImageView subButtonImg4=new ImageView(getActivity());
 
-        subButtonImg1.setImageDrawable(resources.getDrawable(R.drawable.top,null));
+    private void initActionButton() {
+        final ImageView addButtonIcon = new ImageView(getActivity());
+        Resources resources = getActivity().getResources();
+        addButtonIcon.setImageDrawable(resources.getDrawable(R.drawable.add, null));
+        addButtonIcon.setScaleType(ImageView.ScaleType.FIT_XY);
+        addButton = new FloatingActionButton.Builder(getActivity()).setContentView(addButtonIcon).build();
+        ((FloatingActionButton.LayoutParams) addButton.getLayoutParams()).setMargins(200, 500, 30, 100);
+        SubActionButton.Builder subAddButtons = new SubActionButton.Builder(getActivity());
+        final ImageView subButtonImg1 = new ImageView(getActivity());
+        final ImageView subButtonImg2 = new ImageView(getActivity());
+        final ImageView subButtonImg3 = new ImageView(getActivity());
+        final ImageView subButtonImg4 = new ImageView(getActivity());
+
+        subButtonImg1.setImageDrawable(resources.getDrawable(R.drawable.top, null));
         subButtonImg1.setScaleType(ImageView.ScaleType.FIT_XY);
-        subButtonImg2.setImageDrawable(resources.getDrawable(R.drawable.pant,null));
+        subButtonImg2.setImageDrawable(resources.getDrawable(R.drawable.pant, null));
         subButtonImg2.setScaleType(ImageView.ScaleType.FIT_XY);
-        subButtonImg3.setImageDrawable(resources.getDrawable(R.drawable.shoes,null));
+        subButtonImg3.setImageDrawable(resources.getDrawable(R.drawable.shoes, null));
         subButtonImg3.setScaleType(ImageView.ScaleType.FIT_XY);
-        subButtonImg4.setImageDrawable(resources.getDrawable(R.drawable.hat,null));
+        subButtonImg4.setImageDrawable(resources.getDrawable(R.drawable.hat, null));
         subButtonImg4.setScaleType(ImageView.ScaleType.FIT_XY);
 
-        SubActionButton subButton1=subAddButtons.setContentView(subButtonImg1).build();
-        SubActionButton subButton2=subAddButtons.setContentView(subButtonImg2).build();
-        SubActionButton subButton3=subAddButtons.setContentView(subButtonImg3).build();
-        SubActionButton subButton4=subAddButtons.setContentView(subButtonImg4).build();
+        SubActionButton subButton1 = subAddButtons.setContentView(subButtonImg1).build();
+        SubActionButton subButton2 = subAddButtons.setContentView(subButtonImg2).build();
+        SubActionButton subButton3 = subAddButtons.setContentView(subButtonImg3).build();
+        SubActionButton subButton4 = subAddButtons.setContentView(subButtonImg4).build();
 
-        addButtonMenu=new FloatingActionMenu.Builder(getActivity()).addSubActionView(subButton1)
+        addButtonMenu = new FloatingActionMenu.Builder(getActivity()).addSubActionView(subButton1)
                 .addSubActionView(subButton2)
                 .addSubActionView(subButton3)
                 .addSubActionView(subButton4)
@@ -116,48 +123,48 @@ private TextView topText;
             @Override
             public void onMenuOpened(FloatingActionMenu floatingActionMenu) {
                 addButtonIcon.setRotation(0);
-                PropertyValuesHolder holder=PropertyValuesHolder.ofFloat(View.ROTATION,45);
-                ObjectAnimator animator=ObjectAnimator.ofPropertyValuesHolder(addButtonIcon,holder);
+                PropertyValuesHolder holder = PropertyValuesHolder.ofFloat(View.ROTATION, 45);
+                ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(addButtonIcon, holder);
                 animator.start();
             }
 
             @Override
             public void onMenuClosed(FloatingActionMenu floatingActionMenu) {
                 addButtonIcon.setRotation(45);
-                PropertyValuesHolder holder=PropertyValuesHolder.ofFloat(View.ROTATION,0);
-                ObjectAnimator animator=ObjectAnimator.ofPropertyValuesHolder(addButtonIcon,holder);
+                PropertyValuesHolder holder = PropertyValuesHolder.ofFloat(View.ROTATION, 0);
+                ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(addButtonIcon, holder);
                 animator.start();
             }
         });
         subButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),AddActivity.class);
-                intent.putExtra("addClothType","top");
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                intent.putExtra("addClothType", "top");
                 startActivity(intent);
             }
         });
         subButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),AddActivity.class);
-                intent.putExtra("addClothType","pants");
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                intent.putExtra("addClothType", "pants");
                 startActivity(intent);
             }
         });
         subButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),AddActivity.class);
-                intent.putExtra("addClothType","shoes");
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                intent.putExtra("addClothType", "shoes");
                 startActivity(intent);
             }
         });
         subButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),AddActivity.class);
-                intent.putExtra("addClothType","hat");
+                Intent intent = new Intent(getActivity(), AddActivity.class);
+                intent.putExtra("addClothType", "hat");
                 startActivity(intent);
             }
         });
@@ -168,12 +175,11 @@ private TextView topText;
         super.onStart();
         initList();
         recyclerView = getView().findViewById(R.id.CLOTH_TYPE_LIST);
-        topText=getView().findViewById(R.id.topText);
-        Drawable[] drawables=topText.getCompoundDrawables();
-        drawables[0].setBounds(300,0,400,100);
-        String url= HttpService.serverUrl+"cloth/getall";
-        HttpService.okHttpGetCloth(url,getActivity(),recyclerView,mList);
-        topText.setCompoundDrawables(drawables[0],drawables[1],drawables[2],drawables[3]);
+        topText = getView().findViewById(R.id.topText);
+        Drawable[] drawables = topText.getCompoundDrawables();
+        drawables[0].setBounds(300, 0, 400, 100);
+        topText.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
+        getList();
 
     }
 
@@ -183,12 +189,19 @@ private TextView topText;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_cloth, container, false);
     }
+
     @Override
-    public void onDetach(){
+    public void onDetach() {
         addButtonMenu.close(true);
         addButton.setVisibility(View.INVISIBLE);
         super.onDetach();
     }
 
+    private void getList() {
+        MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(getActivity(), mList, ClothUtil.tops, ClothUtil.pants, ClothUtil.shoes);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(myRecyclerAdapter);
+    }
 
 }

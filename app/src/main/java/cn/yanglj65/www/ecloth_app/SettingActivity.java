@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
+import cn.yanglj65.www.ecloth_app.Util.SettingUtil;
 import cn.yanglj65.www.ecloth_app.Util.ToolUtil;
 
 public class SettingActivity extends AppCompatActivity {
@@ -16,22 +18,54 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Button back=findViewById(R.id.BACKSETTING);
+        Button back = findViewById(R.id.BACKSETTING);
         ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(SettingActivity.this,HomeActivity.class);
-                intent.putExtra("fragment","user");
+                final Intent intent = new Intent(SettingActivity.this, HomeActivity.class);
+                intent.putExtra("fragment", "user");
                 startActivity(intent);
             }
         });
-        Button commonSetting=findViewById(R.id.COMMONBTN);
+        Button commonSetting = findViewById(R.id.COMMONBTN);
         commonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(SettingActivity.this,CommonSettingsActivity.class);
+                final Intent intent = new Intent(SettingActivity.this, CommonSettingsActivity.class);
                 startActivity(intent);
+            }
+        });
+        Button remindBtn = findViewById(R.id.REMINDBTN);
+        remindBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(SettingActivity.this, RemindActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button privacyBtn=findViewById(R.id.PRIVACYBTN);
+        privacyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent = new Intent(SettingActivity.this, PrivacyActivity.class);
+                startActivity(intent);
+            }
+        });
+        Button updateBtn = findViewById(R.id.UPADATEBTN);
+        updateBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlterUtil.makeAlter(SettingActivity.this, "当前版本: " + SettingUtil.version + "\n" + SettingUtil.shouldUpdate
+                        + "\n不要问我为什么弹框，因为这样可以少写一个界面\nCopyRight: ylj 2018");
+            }
+        });
+        Button aboutBtn = findViewById(R.id.ABOUTBTN);
+        aboutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlterUtil.makeAlter(SettingActivity.this, "当前版本: " + SettingUtil.version + "\n" + SettingUtil.aboutMe
+                        + "\n不要问我为什么弹框，因为这样可以少写一个界面\nCopyRight: ylj 2018");
             }
         });
     }

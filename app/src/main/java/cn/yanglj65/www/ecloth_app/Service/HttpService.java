@@ -2,6 +2,7 @@ package cn.yanglj65.www.ecloth_app.Service;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,17 +24,21 @@ import java.net.URLEncoder;
 import java.util.List;
 
 import cn.yanglj65.www.ecloth_app.Adapter.MyRecyclerAdapter;
+import cn.yanglj65.www.ecloth_app.Entity.Cloth;
 import cn.yanglj65.www.ecloth_app.Entity.Pants;
 import cn.yanglj65.www.ecloth_app.Entity.Result;
 import cn.yanglj65.www.ecloth_app.Entity.Shoes;
 import cn.yanglj65.www.ecloth_app.Entity.Tops;
+import cn.yanglj65.www.ecloth_app.R;
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
+import cn.yanglj65.www.ecloth_app.Util.ClothUtil;
 import cn.yanglj65.www.ecloth_app.Util.JsonUtil;
 import cn.yanglj65.www.ecloth_app.Util.UserUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.FormBody;
@@ -44,10 +49,10 @@ import okhttp3.ResponseBody;
 
 
 public class HttpService {
-    public final static String serverUrl = "http://192.168.137.214:8008/";
-    // public final static String serverUrl = "http://192.168.43.93:8008/";
-    //public final static String serverUrl = "http://192.168.0.109:8008/";
+     public final static String serverUrl = "http://192.168.137.214:8008/";
+    //public final static String serverUrl = "http://192.168.43.93:8008/";
 
+    //public final static String serverUrl = "http://192.168.0.109:8008/";
     public static Result userSignUp(final String name, final String pwd, final String phone) {
         String signUpUrl = serverUrl + "user/signup";
         HttpURLConnection conn = null;
@@ -158,7 +163,7 @@ public class HttpService {
     }
 
     @SuppressLint("CheckResult")
-    public static void okHttpGetCloth(final String url, final Context context, final RecyclerView recyclerView, final List<String> mList) {
+    public static void okHttpGetCloth(final String url, final Context context) {
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(final ObservableEmitter<String> emitter) throws IOException {
@@ -201,20 +206,15 @@ public class HttpService {
                     JSONObject resultJson = new JSONObject(s);
                     Result result = JsonUtil.jsonToResult(resultJson);
                     if (result.getMsg().equals("ok")) {
-                        List<Tops> tops;
-                        List<Pants> pants;
-                        List<Shoes> shoes;
+
                         JSONObject dataObject = resultJson.getJSONObject("data");
                         JSONArray topsJsonArray = dataObject.getJSONArray("tops");
                         JSONArray pantsJsonArray = dataObject.getJSONArray("pants");
                         JSONArray shoesJsonArray = dataObject.getJSONArray("shoes");
-                        tops = JsonUtil.jsonToTopList(topsJsonArray);
-                        pants = JsonUtil.jsonToPantList(pantsJsonArray);
-                        shoes = JsonUtil.jsonToShoesList(shoesJsonArray);
-                        MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(context, mList, tops, pants, shoes);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-                        recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(myRecyclerAdapter);
+                        ClothUtil.tops = JsonUtil.jsonToTopList(topsJsonArray);
+                        ClothUtil.pants = JsonUtil.jsonToPantList(pantsJsonArray);
+                        ClothUtil.shoes = JsonUtil.jsonToShoesList(shoesJsonArray);
+
                     } else {
                         AlterUtil.makeAlter(context, result.getMsg());
                     }
@@ -273,6 +273,101 @@ public class HttpService {
                 }
             }
         });
+    }
 
+    public static Disposable sendBug(final Context context, final String bugStr) {
+        final String netError = context.getString(R.string.net_error);
+        final String ServerError = context.getString(R.string.server_error);
+        return Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(final ObservableEmitter<String> emitter) throws IOException {
+                String sendUrl = serverUrl + "bug/send";
+                OkHttpClient httpClient = new OkHttpClient();
+                FormBody formBody = new FormBody.Builder()
+                        .add("bug", bugStr)
+                        .build();
+                final Request request = new Request.Builder().url(sendUrl)
+                        .addHeader("Authorization", UserUtil.accessToken)
+                        .post(formBody)
+                        .build();
+                Response response = httpClient.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    String result;
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        result = body.string();
+                        emitter.onNext(result);
+                    } else {
+                        emitter.onNext(ServerError);
+                    }
+                } else {
+                    emitter.onNext(netError);
+                }
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                if (s.equals(ServerError) || s.equals(netError)) {
+                    AlterUtil.makeAlter(context, s);
+                } else {
+                    JSONObject resultObject = new JSONObject(s);
+                    final Result result = JsonUtil.jsonToResult(resultObject);
+                    if (result.getMsg().equals("ok")) {
+                        AlterUtil.makeAlter(context, "Bug已成功反馈给开发者\n咨询QQ 1069148429 了解最新的解决进度\n感谢您的反馈，祝您生活愉快");
+                    } else {
+                        AlterUtil.makeAlter(context, "发送失败：" + result.getMsg());
+                    }
+                }
+            }
+        });
+    }
+
+    public static Disposable modifyPwd(final Context context, final String oldPwd, final String newPwd) {
+        final String netError = context.getString(R.string.net_error);
+        final String ServerError = context.getString(R.string.server_error);
+        return Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(final ObservableEmitter<String> emitter) throws IOException {
+                String sendUrl = serverUrl + "user/modifypwd";
+                OkHttpClient httpClient = new OkHttpClient();
+                FormBody formBody = new FormBody.Builder()
+                        .add("oldpassword", oldPwd)
+                        .add("newpassword", newPwd)
+                        .build();
+                final Request request = new Request.Builder().url(sendUrl)
+                        .addHeader("Authorization", UserUtil.accessToken)
+                        .post(formBody)
+                        .build();
+                Response response = httpClient.newCall(request).execute();
+                if (response.isSuccessful()) {
+                    String result;
+                    ResponseBody body = response.body();
+                    if (body != null) {
+                        result = body.string();
+                        emitter.onNext(result);
+                    } else {
+                        emitter.onNext(ServerError);
+                    }
+                } else {
+                    emitter.onNext(netError);
+                }
+            }
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                if (s.equals(ServerError) || s.equals(netError)) {
+                    AlterUtil.makeAlter(context, s);
+                } else {
+                    JSONObject resultObject = new JSONObject(s);
+                    final Result result = JsonUtil.jsonToResult(resultObject);
+                    if (result.getMsg().equals("ok")) {
+                        AlterUtil.makeAlter(context, "密码已重置，请重新登录");
+                        UserUtil.logOut(context);
+                    } else {
+                        AlterUtil.makeAlter(context, "修改失败：" + result.getMsg());
+                    }
+                }
+            }
+        });
     }
 }

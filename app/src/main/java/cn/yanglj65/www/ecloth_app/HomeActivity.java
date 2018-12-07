@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import cn.yanglj65.www.ecloth_app.Service.HttpService;
+
 public class HomeActivity extends AppCompatActivity {
     private HomeFragment homeFragment;
     private ClothFragment clothFragment;
@@ -62,27 +64,21 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        String url= HttpService.serverUrl+"cloth/getall";
+        HttpService.okHttpGetCloth(url,HomeActivity.this);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setDefaultFragment();
     }
 
     private void setDefaultFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
         String fragment=getIntent().getStringExtra("fragment");
         if(fragment==null||fragment.equals("home")){
-            homeFragment = new HomeFragment();
-            transaction.replace(R.id.FRAME_LAYOUT, homeFragment);
+           navigation.setSelectedItemId(R.id.navigation_home);
         }else if(fragment.equals("cloth")){
-            clothFragment = new ClothFragment();
-            transaction.replace(R.id.FRAME_LAYOUT, clothFragment);
+            navigation.setSelectedItemId(R.id.navigation_dashboard);
         }else{
-            userFragment = new UserFragment();
-            transaction.replace(R.id.FRAME_LAYOUT, userFragment);
+            navigation.setSelectedItemId(R.id.navigation_notifications);
         }
-        transaction.commit();
     }
-
-
 }

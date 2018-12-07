@@ -1,10 +1,12 @@
 package cn.yanglj65.www.ecloth_app;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -12,6 +14,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 
 import cn.yanglj65.www.ecloth_app.Util.SettingUtil;
+import cn.yanglj65.www.ecloth_app.Util.ToolUtil;
 
 public class CommonSettingsActivity extends AppCompatActivity {
 
@@ -19,10 +22,20 @@ public class CommonSettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_common_settings);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         Switch notificationSwitch = findViewById(R.id.NOTIFICATION_SWITCH);
         Switch imgSwitch = findViewById(R.id.IMG_SWITCH);
         Spinner fontSizeSpinner = findViewById(R.id.FONT_SIZE_SPINNER);
         fontSizeSpinner.setSelection(1, true);
+        Button back=findViewById(R.id.BACKCOMMON);
+        ToolUtil.setButtonImageLeft(back);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent=new Intent(CommonSettingsActivity.this,SettingActivity.class);
+                startActivity(intent);
+            }
+        });
         notificationSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

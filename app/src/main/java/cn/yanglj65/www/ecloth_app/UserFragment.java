@@ -71,7 +71,8 @@ public class UserFragment extends Fragment {
         bugReporter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                final Intent intent = new Intent(getActivity(), BugReportActivity.class);
+                startActivity(intent);
             }
         });
     }

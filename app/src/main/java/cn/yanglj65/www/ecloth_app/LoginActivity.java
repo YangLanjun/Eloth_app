@@ -23,6 +23,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class LoginActivity extends AppCompatActivity {
     EditText UserName;
@@ -39,7 +40,6 @@ public class LoginActivity extends AppCompatActivity {
        String passwordPreference=sp.getString("password",null);
        if(userNamePreferences!=null&&passwordPreference!=null){
            check(userNamePreferences,passwordPreference);
-           return;
        }
         UserName = findViewById(R.id.USER_NAME_TEXT);
         Password = findViewById(R.id.PWD_TEXT);
@@ -84,7 +84,12 @@ public class LoginActivity extends AppCompatActivity {
             }
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                String res = response.body().string();
+
+                String res = null;
+                final ResponseBody body = response.body();
+                if (body != null) {
+                    res = body.string();
+                }
                 try {
                     JSONObject resultObject=new JSONObject(res);
                     final Result result= JsonUtil.jsonToResult(resultObject);

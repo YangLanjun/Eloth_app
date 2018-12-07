@@ -42,5 +42,20 @@ public class PersonInfoActivity extends AppCompatActivity {
                 AlterUtil.makeAlter(PersonInfoActivity.this,UserUtil.phone);
             }
         });
+        Button logOutBtn=findViewById(R.id.LOGOUTBTN);
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserUtil.logOut(PersonInfoActivity.this);
+            }
+        });
+        Button modifyPwdBtn=findViewById(R.id.MODIFYPWDBTN);
+        modifyPwdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Intent intent=new Intent(PersonInfoActivity.this,ModifyPwdActivity.class);
+               startActivity(intent);
+            }
+        });
     }
 }

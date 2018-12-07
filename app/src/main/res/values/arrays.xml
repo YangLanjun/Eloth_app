@@ -29,4 +29,21 @@
         <item>中</item>
         <item>小</item>
     </string-array>
+
+    <string-array name="occasions">
+        <item>去上班</item>
+        <item>去上课</item>
+        <item>去面试</item>
+        <item>去约会</item>
+        <item>去出游</item>
+        <item>去运动</item>
+        <item>休闲</item>
+        <item>去买菜</item>
+        <item>去吃饭</item>
+        <item>去逛街</item>
+        <item>去看电影</item>
+        <item>去出差</item>
+        <item>去坐火车</item>
+        <item>去坐飞机</item>
+    </string-array>
 </resources>

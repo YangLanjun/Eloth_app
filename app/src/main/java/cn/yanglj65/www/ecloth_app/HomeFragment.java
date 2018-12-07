@@ -10,6 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import java.io.IOException;
+
+import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
+import cn.yanglj65.www.ecloth_app.Util.ToolUtil;
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -85,10 +88,31 @@ private TextView mTextMessage;
                 getWeather();
             }
         });
+        Button occasionBtn=getView().findViewById(R.id.OCCASION_BTN);
+        Button randomBtn=getView().findViewById(R.id.RANDOM_BTN);
+        Button interactBtn=getView().findViewById(R.id.INTERACT_BTN);
+        occasionBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToolUtil.changeActivity(getActivity(),OccasionActivity.class);
+            }
+        });
+        randomBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ToolUtil.changeActivity(getActivity(),RandomResultActivity.class);
+            }
+        });
+        interactBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlterUtil.makeAlter(getActivity(),"暂未开放，敬请期待");
+            }
+        });
     }
     @SuppressLint("CheckResult")
     private void getWeather(){
-        final String WeatherUrl = "http://wthrcdn.etouch.cn/weather_mini?citykey=101010100";
+        final String WeatherUrl = "http://wthrcdn.etouch.cn/weather_mini?citykey=101280102";
         final OkHttpClient client = new OkHttpClient();
         // Subscription subscription= Observable.defer()
         Observable.create(new ObservableOnSubscribe<String>() {

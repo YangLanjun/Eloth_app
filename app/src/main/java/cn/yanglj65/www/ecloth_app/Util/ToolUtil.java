@@ -1,5 +1,8 @@
 package cn.yanglj65.www.ecloth_app.Util;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.widget.Button;
 
@@ -19,6 +22,10 @@ public class ToolUtil {
             }
         }
         return randomIntArray;
+    }
+    public static int getRandomInt(int max){
+        Random random=new Random();
+        return random.nextInt(max);
     }
 
     public static void setButtonImageLeft(Button button){
@@ -54,6 +61,12 @@ public class ToolUtil {
         {
             return (leftStr+" "+rightStr).substring(0, length);
         }
+
+    }
+
+    public static void changeActivity(Context context,Class<?> anyClass){
+        final Intent intent=new Intent(context,anyClass);
+        context.startActivity(intent);
 
     }
 }

@@ -30,7 +30,13 @@
         <activity android:name=".PersonInfoActivity" />
         <activity android:name=".SettingActivity" />
         <activity android:name=".BugReportActivity" />
-        <activity android:name=".CommonSettingsActivity"></activity>
+        <activity android:name=".CommonSettingsActivity" />
+        <activity android:name=".RemindActivity" />
+        <activity android:name=".PrivacyActivity" />
+        <activity android:name=".ModifyPwdActivity" />
+        <activity android:name=".ClothDetailActivity" />
+        <activity android:name=".OccasionActivity" />
+        <activity android:name=".RandomResultActivity"></activity>
     </application>
 
 </manifest>

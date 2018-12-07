@@ -16,6 +16,10 @@
     <string name="title_dashboard">我的衣橱</string>
     <string name="title_notifications">个人中心</string>
     <string name="about_home">这里是首页</string>
+    <string name="net_error">网络异常，请检查网络重试</string>
+    <string name="server_error">服务器异常，请稍后重试或向开发者反馈</string>
+    <string name="default_show_list">类型：短袖\t\t颜色：黑色\n大小：XXL</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

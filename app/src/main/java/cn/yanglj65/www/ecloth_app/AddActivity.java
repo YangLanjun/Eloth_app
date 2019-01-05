@@ -167,4 +167,11 @@ public class AddActivity extends AppCompatActivity {
         colorText.setText("请选择帽子的颜色");
         sizeText.setText("请选择帽子的大小");
     }
+    @Override
+    public void onBackPressed(){
+        super.onBackPressed();
+        final Intent intent=new Intent(this,HomeActivity.class);
+        intent.putExtra("fragment","cloth");
+        startActivity(intent);
+    }
 }

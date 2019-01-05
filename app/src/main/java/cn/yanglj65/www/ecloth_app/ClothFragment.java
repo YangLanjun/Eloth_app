@@ -180,7 +180,6 @@ public class ClothFragment extends Fragment {
         drawables[0].setBounds(300, 0, 400, 100);
         topText.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
         getList();
-
     }
 
     @Override
@@ -198,6 +197,8 @@ public class ClothFragment extends Fragment {
     }
 
     private void getList() {
+        String url= HttpService.serverUrl+"cloth/getall";
+        HttpService.okHttpGetCloth(url,getActivity());
         MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(getActivity(), mList, ClothUtil.tops, ClothUtil.pants, ClothUtil.shoes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);

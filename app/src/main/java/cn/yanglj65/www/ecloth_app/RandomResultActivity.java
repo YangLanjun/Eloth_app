@@ -25,7 +25,7 @@ public class RandomResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_random_result);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         Button back = findViewById(R.id.BACK_RANDOM_RESULT);
-        ToolUtil.setButtonImageLeft(back);
+        //ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

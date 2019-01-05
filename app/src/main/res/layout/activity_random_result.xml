@@ -8,76 +8,74 @@
 
     <ImageView
         android:id="@+id/TOP_IMG_RESULT"
-        android:layout_width="98dp"
+        android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/PANTS_IMG_RESULT"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/BACK_RANDOM_RESULT"
         app:srcCompat="@drawable/top" />
 
     <ImageView
         android:id="@+id/PANTS_IMG_RESULT"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37"
+        app:layout_constraintEnd_toEndOf="@+id/TOP_IMG_RESULT"
+        app:layout_constraintStart_toStartOf="@+id/TOP_IMG_RESULT"
+        app:layout_constraintTop_toBottomOf="@+id/TOP_IMG_RESULT"
         app:srcCompat="@drawable/pant" />
 
     <ImageView
         android:id="@+id/SHOES_IMG_Result"
-        android:layout_width="100dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/PANTS_IMG_RESULT"
+        app:layout_constraintStart_toStartOf="@+id/PANTS_IMG_RESULT"
         app:layout_constraintTop_toBottomOf="@+id/PANTS_IMG_RESULT"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/shoes" />
 
     <Button
         android:id="@+id/FEEDBACK_BTN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@android:color/transparent"
         android:padding="10dp"
         android:text="结果不满意?点此反馈"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/SHOES_IMG_Result"
+        app:layout_constraintStart_toStartOf="@+id/SHOES_IMG_Result"
         app:layout_constraintTop_toBottomOf="@+id/SHOES_IMG_Result"
         app:layout_constraintVertical_bias="0.13" />
+
     <Button
         android:id="@+id/BACK_RANDOM_RESULT"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="40dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/user_btn_border"
-        android:drawableLeft="@drawable/come_back"
-        android:drawablePadding="20dp"
         android:gravity="center_horizontal|start"
-        android:paddingTop="35dp"
+        android:paddingTop="10dp"
+        android:paddingStart="56dp"
+        android:paddingEnd="0dp"
         android:text="根据您的风格和特性，我们为您挑出了如下的搭配："
-        app:layout_constraintBottom_toTopOf="@+id/TOP_IMG_RESULT"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="48dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="@+id/BACK_RANDOM_RESULT"
+        app:layout_constraintStart_toStartOf="@+id/BACK_RANDOM_RESULT"
+        app:layout_constraintTop_toTopOf="@+id/BACK_RANDOM_RESULT"
+        app:srcCompat="@drawable/come_back" />
+
 </android.support.constraint.ConstraintLayout>

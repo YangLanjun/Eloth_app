@@ -66,10 +66,10 @@ public class ClothDetailAdapter extends RecyclerView.Adapter<ClothDetailAdapter.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
-            Cloth cloth = cloths.get(position);
-            String fileName = directory + cloth.getType() + "/" + cloth.getColor()+".png";
-            holder.itemImage.setImageDrawable(PathUtil.assets2Drawable(mContext, fileName));
-            setClothDetailText(cloth.getType(), cloth.getColor(), cloth.getSize(), holder);
+        Cloth cloth = cloths.get(position);
+        String fileName = directory + cloth.getType() + "/" + cloth.getColor() + ".png";
+        holder.itemImage.setImageDrawable(PathUtil.assets2Drawable(mContext, fileName));
+        setClothDetailText(cloth.getType(), cloth.getColor(), cloth.getSize(), holder);
     }
 
     @Override

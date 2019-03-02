@@ -197,8 +197,8 @@ public class ClothFragment extends Fragment {
     }
 
     private void getList() {
-        String url= HttpService.serverUrl+"cloth/getall";
-        HttpService.okHttpGetCloth(url,getActivity());
+        String url = HttpService.serverUrl + "cloth/getall";
+        HttpService.okHttpGetCloth(url, getActivity());
         MyRecyclerAdapter myRecyclerAdapter = new MyRecyclerAdapter(getActivity(), mList, ClothUtil.tops, ClothUtil.pants, ClothUtil.shoes);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);

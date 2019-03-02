@@ -49,10 +49,11 @@ import okhttp3.ResponseBody;
 
 
 public class HttpService {
-     //public final static String serverUrl = "http://192.168.137.214:8008/";
+    //public final static String serverUrl = "http://192.168.137.214:8008/";
     //public final static String serverUrl = "http://192.168.43.93:8008/";
     //public final static String serverUrl = "http://192.168.0.109:8008/";
     public final static String serverUrl = "http://eloth.yanglj65.cn:8008/";
+
     public static Result userSignUp(final String name, final String pwd, final String phone) {
         String signUpUrl = serverUrl + "user/signup";
         HttpURLConnection conn = null;

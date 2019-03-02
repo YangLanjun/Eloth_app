@@ -57,7 +57,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         if (position % 2 == 0) {
             ArrayList<Cloth> clothList = new ArrayList<>();
             int length;
-           final String directory;
+            final String directory;
             Resources resources = mContext.getResources();
             if (position == 0) {
                 directory = "tops/";
@@ -83,8 +83,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 directory = "hats/";
                 holder.itemImage.setImageDrawable(resources.getDrawable(R.drawable.hat, null));
                 holder.imageText.setText("帽子");
-            }else {
-                directory="";
+            } else {
+                directory = "";
             }
             length = clothList.size() <= 3 ? clothList.size() : 3;
             if (length == 0) {
@@ -93,8 +93,8 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             holder.itemImage.setOnClickListener(new Button.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final Intent intent=new Intent(mContext, ClothDetailActivity.class);
-                    intent.putExtra("type",directory);
+                    final Intent intent = new Intent(mContext, ClothDetailActivity.class);
+                    intent.putExtra("type", directory);
                     mContext.startActivity(intent);
                 }
             });
@@ -136,7 +136,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
             ImageButton item2;
             ImageButton item3;
             itemImage = itemView.findViewById(R.id.itemImage);
-            imageText=itemView.findViewById(R.id.itemText);
+            imageText = itemView.findViewById(R.id.itemText);
             item1 = itemView.findViewById(R.id.itemImage1);
             item2 = itemView.findViewById(R.id.itemImage2);
             item3 = itemView.findViewById(R.id.itemImage3);

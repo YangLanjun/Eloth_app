@@ -10,13 +10,14 @@ public class UserUtil {
     public static int userId;
     public static String userName;
     public static String accessToken;
-    public  static String role;
-    public static  String phone;
+    public static String role;
+    public static String phone;
     public static String createTime;
-    public static void logOut(Context context){
-        SharedPreferences sp=context.getSharedPreferences("login",Context.MODE_PRIVATE);
-        sp.edit().putString("userName",null).putString("password",null).apply();
-        final Intent intent=new Intent(context, LoginActivity.class);
+
+    public static void logOut(Context context) {
+        SharedPreferences sp = context.getSharedPreferences("login", Context.MODE_PRIVATE);
+        sp.edit().putString("userName", null).putString("password", null).apply();
+        final Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
 }

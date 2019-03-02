@@ -21,15 +21,15 @@ public class PrivacyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Switch locationSwitch=findViewById(R.id.LOCATION_SWITCH);
-        Switch showSelfSwitch=findViewById(R.id.SPACE_SWITCH);
-        Switch dataAnalysisSwitch=findViewById(R.id.DATA_ANALYSIS_SWITCH);
-        Button back=findViewById(R.id.BACK_PRIVACY);
+        Switch locationSwitch = findViewById(R.id.LOCATION_SWITCH);
+        Switch showSelfSwitch = findViewById(R.id.SPACE_SWITCH);
+        Switch dataAnalysisSwitch = findViewById(R.id.DATA_ANALYSIS_SWITCH);
+        Button back = findViewById(R.id.BACK_PRIVACY);
         ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(PrivacyActivity.this,SettingActivity.class);
+                final Intent intent = new Intent(PrivacyActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });

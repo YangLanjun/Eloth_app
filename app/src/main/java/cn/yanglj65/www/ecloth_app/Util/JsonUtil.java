@@ -32,8 +32,8 @@ public class JsonUtil {
     public static ArrayList<Tops> jsonToTopList(JSONArray jsonArray) throws JSONException {
         ArrayList<Tops> topList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject topObject=jsonArray.getJSONObject(i);
-            if(topObject.getBoolean("usability")){
+            JSONObject topObject = jsonArray.getJSONObject(i);
+            if (topObject.getBoolean("usability")) {
                 Tops tops = new Tops();
                 tops.top.setId(topObject.getInt("id"));
                 tops.top.setColor(topObject.getString("color"));
@@ -48,8 +48,8 @@ public class JsonUtil {
     public static ArrayList<Pants> jsonToPantList(JSONArray jsonArray) throws JSONException {
         ArrayList<Pants> pantList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject pantObject=jsonArray.getJSONObject(i);
-            if(pantObject.getBoolean("usability")){
+            JSONObject pantObject = jsonArray.getJSONObject(i);
+            if (pantObject.getBoolean("usability")) {
                 Pants pants = new Pants();
                 pants.pant.setId(pantObject.getInt("id"));
                 pants.pant.setColor(pantObject.getString("color"));
@@ -64,8 +64,8 @@ public class JsonUtil {
     public static ArrayList<Shoes> jsonToShoesList(JSONArray jsonArray) throws JSONException {
         ArrayList<Shoes> shoesList = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject shoesObject=jsonArray.getJSONObject(i);
-            if(shoesObject.getBoolean("usability")){
+            JSONObject shoesObject = jsonArray.getJSONObject(i);
+            if (shoesObject.getBoolean("usability")) {
                 Shoes shoes = new Shoes();
                 shoes.shoes.setId(shoesObject.getInt("id"));
                 shoes.shoes.setColor(shoesObject.getString("color"));

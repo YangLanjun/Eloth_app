@@ -51,15 +51,15 @@ public class SignupActivity extends AppCompatActivity {
                 password = passwordText.getText().toString().trim();
                 phone = phoneText.getText().toString().trim();
                 if (phone.length() != 11) {
-                    AlterUtil.makeAlter(SignupActivity.this,"请输入正确的中国大陆地区手机号");
+                    AlterUtil.makeAlter(SignupActivity.this, "请输入正确的中国大陆地区手机号");
                     return;
                 }
                 if (userName.length() < 4) {
-                    AlterUtil.makeAlter(SignupActivity.this,"用户名长度需要大于等于4位，请重新输入");
+                    AlterUtil.makeAlter(SignupActivity.this, "用户名长度需要大于等于4位，请重新输入");
                     return;
                 }
                 if (password.length() < 6) {
-                    AlterUtil.makeAlter(SignupActivity.this,"密码长度需要大于等于6为，请重新输入");
+                    AlterUtil.makeAlter(SignupActivity.this, "密码长度需要大于等于6为，请重新输入");
                 }
                 new Thread(runnable).start();
             }
@@ -67,21 +67,19 @@ public class SignupActivity extends AppCompatActivity {
     }
 
 
-
-
     @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            Bundle data=msg.getData();
-            String resultMsg= data.getString("msg");
+            Bundle data = msg.getData();
+            String resultMsg = data.getString("msg");
             if (resultMsg.equals("ok")) {
                 //Toast.makeText(SignupActivity.this, "注册成功，即将返回登陆界面", Toast.LENGTH_SHORT).show();
                 final Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                 startActivity(intent);
             } else {
-                AlterUtil.makeAlter(SignupActivity.this,resultMsg);
+                AlterUtil.makeAlter(SignupActivity.this, resultMsg);
             }
 
         }

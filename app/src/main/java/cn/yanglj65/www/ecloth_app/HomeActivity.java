@@ -64,20 +64,20 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        String url= HttpService.serverUrl+"cloth/getall";
-        HttpService.okHttpGetCloth(url,HomeActivity.this);
+        String url = HttpService.serverUrl + "cloth/getall";
+        HttpService.okHttpGetCloth(url, HomeActivity.this);
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         setDefaultFragment();
     }
 
     private void setDefaultFragment() {
-        String fragment=getIntent().getStringExtra("fragment");
-        if(fragment==null||fragment.equals("home")){
-           navigation.setSelectedItemId(R.id.navigation_home);
-        }else if(fragment.equals("cloth")){
+        String fragment = getIntent().getStringExtra("fragment");
+        if (fragment == null || fragment.equals("home")) {
+            navigation.setSelectedItemId(R.id.navigation_home);
+        } else if (fragment.equals("cloth")) {
             navigation.setSelectedItemId(R.id.navigation_dashboard);
-        }else{
+        } else {
             navigation.setSelectedItemId(R.id.navigation_notifications);
         }
     }

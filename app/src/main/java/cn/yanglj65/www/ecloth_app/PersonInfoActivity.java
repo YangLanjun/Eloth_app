@@ -19,42 +19,42 @@ public class PersonInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_info);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Button userPhoneBtn=findViewById(R.id.USERPHONEINFOBTN);
-        Button back=findViewById(R.id.BACKINFO);
+        Button userPhoneBtn = findViewById(R.id.USERPHONEINFOBTN);
+        Button back = findViewById(R.id.BACKINFO);
         ToolUtil.setButtonImageLeft(back);
-        TextView userNameText=findViewById(R.id.USERNAMEINFOTEXT);
-        TextView userPhoneText=findViewById(R.id.USERPHONEINFOTEXT);
-        TextView createTimeText=findViewById(R.id.TIMEINFOTEXT);
+        TextView userNameText = findViewById(R.id.USERNAMEINFOTEXT);
+        TextView userPhoneText = findViewById(R.id.USERPHONEINFOTEXT);
+        TextView createTimeText = findViewById(R.id.TIMEINFOTEXT);
         userNameText.setText(UserUtil.userName);
         userPhoneText.setText(UserUtil.phone);
         createTimeText.setText(UserUtil.createTime);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(PersonInfoActivity.this,HomeActivity.class);
-                intent.putExtra("fragment","user");
+                final Intent intent = new Intent(PersonInfoActivity.this, HomeActivity.class);
+                intent.putExtra("fragment", "user");
                 startActivity(intent);
             }
         });
         userPhoneBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlterUtil.makeAlter(PersonInfoActivity.this,UserUtil.phone);
+                AlterUtil.makeAlter(PersonInfoActivity.this, UserUtil.phone);
             }
         });
-        Button logOutBtn=findViewById(R.id.LOGOUTBTN);
+        Button logOutBtn = findViewById(R.id.LOGOUTBTN);
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UserUtil.logOut(PersonInfoActivity.this);
             }
         });
-        Button modifyPwdBtn=findViewById(R.id.MODIFYPWDBTN);
+        Button modifyPwdBtn = findViewById(R.id.MODIFYPWDBTN);
         modifyPwdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(PersonInfoActivity.this,ModifyPwdActivity.class);
-               startActivity(intent);
+                final Intent intent = new Intent(PersonInfoActivity.this, ModifyPwdActivity.class);
+                startActivity(intent);
             }
         });
     }

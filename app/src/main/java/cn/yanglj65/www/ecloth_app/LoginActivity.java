@@ -10,9 +10,12 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.io.IOException;
+
 import cn.yanglj65.www.ecloth_app.Entity.Result;
 import cn.yanglj65.www.ecloth_app.Service.HttpService;
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
@@ -35,12 +38,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);//设置底部导航栏栏
-        SharedPreferences sp=getSharedPreferences("login",Context.MODE_PRIVATE);
-       String userNamePreferences=sp.getString("username",null);
-       String passwordPreference=sp.getString("password",null);
-       if(userNamePreferences!=null&&passwordPreference!=null){
-           check(userNamePreferences,passwordPreference);
-       }
+        SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+        String userNamePreferences = sp.getString("username", null);
+        String passwordPreference = sp.getString("password", null);
+        if (userNamePreferences != null && passwordPreference != null) {
+            check(userNamePreferences, passwordPreference);
+        }
         UserName = findViewById(R.id.USER_NAME_TEXT);
         Password = findViewById(R.id.PWD_TEXT);
         Button Login = findViewById(R.id.LOGIN_BTN);
@@ -82,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                 });
             }
+
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
 
@@ -91,20 +95,20 @@ public class LoginActivity extends AppCompatActivity {
                     res = body.string();
                 }
                 try {
-                    JSONObject resultObject=new JSONObject(res);
-                    final Result result= JsonUtil.jsonToResult(resultObject);
-                    if (result.getMsg().equals("ok")){
-                        SharedPreferences sp=getSharedPreferences("login", Context.MODE_PRIVATE);
-                        sp.edit().putString("username",userName).putString("password",pwd).apply();
-                        JSONObject userObject=resultObject.getJSONObject("data");
+                    JSONObject resultObject = new JSONObject(res);
+                    final Result result = JsonUtil.jsonToResult(resultObject);
+                    if (result.getMsg().equals("ok")) {
+                        SharedPreferences sp = getSharedPreferences("login", Context.MODE_PRIVATE);
+                        sp.edit().putString("username", userName).putString("password", pwd).apply();
+                        JSONObject userObject = resultObject.getJSONObject("data");
                         JsonUtil.jsonToUser(userObject);
                         final Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                         startActivity(intent);
-                    }else{
+                    } else {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                AlterUtil.makeAlter(LoginActivity.this,result.getMsg());
+                                AlterUtil.makeAlter(LoginActivity.this, result.getMsg());
                             }
                         });
                     }

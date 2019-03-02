@@ -18,6 +18,7 @@ public class UserFragment extends Fragment {
     public UserFragment() {
         // Required empty public constructor
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,14 +30,15 @@ public class UserFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user, container, false);
     }
+
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
-        Button personInfo=getView().findViewById(R.id.PERSONINFO_BTN);
-        Button record=getView().findViewById(R.id.RECORD_BTN);
-        Button scoreInfo=getView().findViewById(R.id.SCORE_BTN);
-        Button setting=getView().findViewById(R.id.SETTINGS_BTN);
-        Button bugReporter=getView().findViewById(R.id.BUGREPORT_BTN);
+        Button personInfo = getView().findViewById(R.id.PERSONINFO_BTN);
+        Button record = getView().findViewById(R.id.RECORD_BTN);
+        Button scoreInfo = getView().findViewById(R.id.SCORE_BTN);
+        Button setting = getView().findViewById(R.id.SETTINGS_BTN);
+        Button bugReporter = getView().findViewById(R.id.BUGREPORT_BTN);
         ToolUtil.setButtonImageLeft(personInfo);
         ToolUtil.setButtonImageLeft(record);
         ToolUtil.setButtonImageLeft(scoreInfo);

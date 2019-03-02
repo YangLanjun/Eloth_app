@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+
 import java.util.Objects;
 
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
@@ -19,7 +20,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 //        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Toolbar settingToolbar=findViewById(R.id.SETTINGTOOLBAR);
+        Toolbar settingToolbar = findViewById(R.id.SETTINGTOOLBAR);
         setSupportActionBar(settingToolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
@@ -40,7 +41,7 @@ public class SettingActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        Button privacyBtn=findViewById(R.id.PRIVACYBTN);
+        Button privacyBtn = findViewById(R.id.PRIVACYBTN);
         privacyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -118,9 +118,9 @@ public class AddActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(type!=null&&color!=null&&size!=null){
-                    HttpService.okHttpAddCloth(AddActivity.this,color,type,size,usability,addClothType,view);
-                }else{
+                if (type != null && color != null && size != null) {
+                    HttpService.okHttpAddCloth(AddActivity.this, color, type, size, usability, addClothType, view);
+                } else {
                     Snackbar.make(view, "请填写完整的衣物信息", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -167,11 +167,12 @@ public class AddActivity extends AppCompatActivity {
         colorText.setText("请选择帽子的颜色");
         sizeText.setText("请选择帽子的大小");
     }
+
     @Override
-    public void onBackPressed(){
+    public void onBackPressed() {
         super.onBackPressed();
-        final Intent intent=new Intent(this,HomeActivity.class);
-        intent.putExtra("fragment","cloth");
+        final Intent intent = new Intent(this, HomeActivity.class);
+        intent.putExtra("fragment", "cloth");
         startActivity(intent);
     }
 }

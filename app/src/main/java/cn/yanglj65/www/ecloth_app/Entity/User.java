@@ -2,13 +2,13 @@ package cn.yanglj65.www.ecloth_app.Entity;
 
 public class User {
     private int id;
-    private  String role;
-    private  String userName;
+    private String role;
+    private String userName;
     private String password;
     private String phone;
     private String accessToken;
     private String createdTime;
-    private boolean isDelete=false;
+    private boolean isDelete = false;
 
     public int getId() {
         return id;

@@ -15,7 +15,7 @@ import cn.yanglj65.www.ecloth_app.R;
 import cn.yanglj65.www.ecloth_app.RandomResultActivity;
 
 
-public class OccasionBtnAdapter extends  RecyclerView.Adapter<OccasionBtnAdapter.MyViewHolder>{
+public class OccasionBtnAdapter extends RecyclerView.Adapter<OccasionBtnAdapter.MyViewHolder> {
     private Context mContext;
     private View mView;
     private List<String> occasionList;
@@ -37,12 +37,12 @@ public class OccasionBtnAdapter extends  RecyclerView.Adapter<OccasionBtnAdapter
     @Override
     public void onBindViewHolder(@NonNull OccasionBtnAdapter.MyViewHolder holder, int position) {
         holder.itemBtn.setText(occasionList.get(position));
-        final int pos=position;
+        final int pos = position;
         holder.itemBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(mContext, RandomResultActivity.class);
-                intent.putExtra("doing",occasionList.get(pos));
+                final Intent intent = new Intent(mContext, RandomResultActivity.class);
+                intent.putExtra("doing", occasionList.get(pos));
                 mContext.startActivity(intent);
             }
         });
@@ -55,6 +55,7 @@ public class OccasionBtnAdapter extends  RecyclerView.Adapter<OccasionBtnAdapter
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         public Button itemBtn;
+
         MyViewHolder(View itemView) {
             super(itemView);
             itemBtn = itemView.findViewById(R.id.itemBtn);

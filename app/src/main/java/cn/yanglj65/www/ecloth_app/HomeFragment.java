@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.io.IOException;
 
 import cn.yanglj65.www.ecloth_app.Util.AlterUtil;
@@ -38,7 +39,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-private TextView mTextMessage;
+    private TextView mTextMessage;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -77,41 +78,43 @@ private TextView mTextMessage;
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
+
     @Override
-    public  void  onStart() {
+    public void onStart() {
         super.onStart();
-        mTextMessage=getView().findViewById(R.id.TEST_WEATHER);
-        Button weatherBtn=getView().findViewById(R.id.GEI_WEATHER_BTN);
+        mTextMessage = getView().findViewById(R.id.TEST_WEATHER);
+        Button weatherBtn = getView().findViewById(R.id.GEI_WEATHER_BTN);
         weatherBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getWeather();
             }
         });
-        Button occasionBtn=getView().findViewById(R.id.OCCASION_BTN);
-        Button randomBtn=getView().findViewById(R.id.RANDOM_BTN);
-        Button interactBtn=getView().findViewById(R.id.INTERACT_BTN);
+        Button occasionBtn = getView().findViewById(R.id.OCCASION_BTN);
+        Button randomBtn = getView().findViewById(R.id.RANDOM_BTN);
+        Button interactBtn = getView().findViewById(R.id.INTERACT_BTN);
         occasionBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToolUtil.changeActivity(getActivity(),OccasionActivity.class);
+                ToolUtil.changeActivity(getActivity(), OccasionActivity.class);
             }
         });
         randomBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToolUtil.changeActivity(getActivity(),RandomResultActivity.class);
+                ToolUtil.changeActivity(getActivity(), RandomResultActivity.class);
             }
         });
         interactBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlterUtil.makeAlter(getActivity(),"暂未开放，敬请期待");
+                AlterUtil.makeAlter(getActivity(), "暂未开放，敬请期待");
             }
         });
     }
+
     @SuppressLint("CheckResult")
-    private void getWeather(){
+    private void getWeather() {
         final String WeatherUrl = "http://wthrcdn.etouch.cn/weather_mini?citykey=101280102";
         final OkHttpClient client = new OkHttpClient();
         // Subscription subscription= Observable.defer()
@@ -126,7 +129,7 @@ private TextView mTextMessage;
                     if (response.body() != null) {
                         res = response.body().string();
                         emitter.onNext(res);
-                    }else{
+                    } else {
                         emitter.onNext("网络异常,请检查网络后重试");
                     }
 

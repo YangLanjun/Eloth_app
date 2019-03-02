@@ -10,62 +10,57 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class ToolUtil {
-    public static ArrayList<Integer> getRandomIntArray(int n,int max){
-        ArrayList<Integer> randomIntArray=new ArrayList<>();
-        Random random=new Random();
-        for (int i=0;i<n;i++){
-            Integer randomInteger=random.nextInt(max);
-            if(!randomIntArray.contains(randomInteger)){
+    public static ArrayList<Integer> getRandomIntArray(int n, int max) {
+        ArrayList<Integer> randomIntArray = new ArrayList<>();
+        Random random = new Random();
+        for (int i = 0; i < n; i++) {
+            Integer randomInteger = random.nextInt(max);
+            if (!randomIntArray.contains(randomInteger)) {
                 randomIntArray.add(randomInteger);
-            }else{
+            } else {
                 i--;
             }
         }
         return randomIntArray;
     }
-    public static int getRandomInt(int max){
-        Random random=new Random();
+
+    public static int getRandomInt(int max) {
+        Random random = new Random();
         return random.nextInt(max);
     }
 
-    public static void setButtonImageLeft(Button button){
-        Drawable[] drawables=button.getCompoundDrawables();
-        drawables[0].setBounds(30,0,130,100);
-        if(drawables[2]!=null){
-            drawables[2].setBounds(10,0,70,60);
+    public static void setButtonImageLeft(Button button) {
+        Drawable[] drawables = button.getCompoundDrawables();
+        drawables[0].setBounds(30, 0, 130, 100);
+        if (drawables[2] != null) {
+            drawables[2].setBounds(10, 0, 70, 60);
         }
-        button.setCompoundDrawables(drawables[0],drawables[1],drawables[2],drawables[3]);
+        button.setCompoundDrawables(drawables[0], drawables[1], drawables[2], drawables[3]);
     }
 
-    public static String formatStr(final String leftStr,String rightStr, int length)
-    {
+    public static String formatStr(final String leftStr, String rightStr, int length) {
 
-        if (rightStr == null)
-        {
-            rightStr="";
+        if (rightStr == null) {
+            rightStr = "";
         }
-        int strLen = rightStr.getBytes().length+leftStr.getBytes().length;
-        if (strLen == length)
-        {
-            return leftStr+rightStr;
-        } else if (strLen < length)
-        {
+        int strLen = rightStr.getBytes().length + leftStr.getBytes().length;
+        if (strLen == length) {
+            return leftStr + rightStr;
+        } else if (strLen < length) {
             int temp = length - strLen;
             String tem = "";
-            for (int i = 0; i < temp; i++)
-            {
+            for (int i = 0; i < temp; i++) {
                 tem = tem + " ";
             }
             return leftStr + tem + rightStr;
-        } else
-        {
-            return (leftStr+" "+rightStr).substring(0, length);
+        } else {
+            return (leftStr + " " + rightStr).substring(0, length);
         }
 
     }
 
-    public static void changeActivity(Context context,Class<?> anyClass){
-        final Intent intent=new Intent(context,anyClass);
+    public static void changeActivity(Context context, Class<?> anyClass) {
+        final Intent intent = new Intent(context, anyClass);
         context.startActivity(intent);
 
     }

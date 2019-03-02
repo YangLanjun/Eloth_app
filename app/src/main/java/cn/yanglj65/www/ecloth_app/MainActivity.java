@@ -19,9 +19,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        welcomeImg=findViewById(R.id.welcomeImg);
-        welcomeImg.setImageDrawable(MainActivity.this.getResources().getDrawable(R.drawable.welcome,null));
-      //  startActivity(intent);
+        welcomeImg = findViewById(R.id.welcomeImg);
+        welcomeImg.setImageDrawable(MainActivity.this.getResources().getDrawable(R.drawable.welcome, null));
+        //  startActivity(intent);
         Timer timer = new Timer();
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -30,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         };
-        timer.schedule(timerTask,3000);
+        timer.schedule(timerTask, 3000);
     }
 }

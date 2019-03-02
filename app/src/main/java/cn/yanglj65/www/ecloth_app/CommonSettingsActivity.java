@@ -27,12 +27,12 @@ public class CommonSettingsActivity extends AppCompatActivity {
         Switch imgSwitch = findViewById(R.id.IMG_SWITCH);
         Spinner fontSizeSpinner = findViewById(R.id.FONT_SIZE_SPINNER);
         fontSizeSpinner.setSelection(1, true);
-        Button back=findViewById(R.id.BACKCOMMON);
+        Button back = findViewById(R.id.BACKCOMMON);
         ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(CommonSettingsActivity.this,SettingActivity.class);
+                final Intent intent = new Intent(CommonSettingsActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
@@ -66,8 +66,8 @@ public class CommonSettingsActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 SettingUtil.fontSize = getResources().getStringArray(R.array.font_size)[position];
-                SharedPreferences sp=getSharedPreferences("settings",Context.MODE_PRIVATE);
-                sp.edit().putString("fontSize",SettingUtil.fontSize).apply();
+                SharedPreferences sp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+                sp.edit().putString("fontSize", SettingUtil.fontSize).apply();
             }
 
             @Override

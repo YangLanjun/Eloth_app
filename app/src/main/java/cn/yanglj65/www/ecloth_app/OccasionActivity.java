@@ -25,20 +25,20 @@ public class OccasionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_occasion);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Button back=findViewById(R.id.BACK_OCCASION);
+        Button back = findViewById(R.id.BACK_OCCASION);
         ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(OccasionActivity.this,HomeActivity.class);
+                final Intent intent = new Intent(OccasionActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
-        String[] occasions=getResources().getStringArray(R.array.occasions);
-        List<String> occasionList=new ArrayList<>(Arrays.asList(occasions));
+        String[] occasions = getResources().getStringArray(R.array.occasions);
+        List<String> occasionList = new ArrayList<>(Arrays.asList(occasions));
         RecyclerView recyclerView = findViewById(R.id.OCCASIONS_BTN);
-        OccasionBtnAdapter occasionBtnAdapter=new OccasionBtnAdapter(OccasionActivity.this,occasionList);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(OccasionActivity.this,3);
+        OccasionBtnAdapter occasionBtnAdapter = new OccasionBtnAdapter(OccasionActivity.this, occasionList);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(OccasionActivity.this, 3);
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(occasionBtnAdapter);
     }

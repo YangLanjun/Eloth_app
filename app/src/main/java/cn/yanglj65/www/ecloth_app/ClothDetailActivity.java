@@ -17,35 +17,35 @@ public class ClothDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cloth_detail);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        TextView topText=findViewById(R.id.CLOTH_DETAIL_TYPE);
-        Drawable[] drawables=topText.getCompoundDrawables();
-        drawables[0].setBounds(400,200,500,300);
-        String clothType=getIntent().getStringExtra("type");
+        TextView topText = findViewById(R.id.CLOTH_DETAIL_TYPE);
+        Drawable[] drawables = topText.getCompoundDrawables();
+        drawables[0].setBounds(400, 200, 500, 300);
+        String clothType = getIntent().getStringExtra("type");
 
-        switch (clothType){
-            case "tops/":{
+        switch (clothType) {
+            case "tops/": {
                 topText.setText("上衣");
                 break;
             }
-            case "pants/":{
+            case "pants/": {
                 topText.setText("裤子");
                 break;
             }
-            case "shoes/":{
+            case "shoes/": {
                 topText.setText("鞋子");
                 break;
             }
-            case "hats/":{
+            case "hats/": {
                 topText.setText("帽子");
                 break;
             }
-            default:{
+            default: {
                 topText.setText("错误的衣服类型");
                 break;
             }
         }
         RecyclerView recyclerView = findViewById(R.id.CLOTH_DETAIL_LIST);
-        ClothDetailAdapter clothDetailAdapter=new ClothDetailAdapter(ClothDetailActivity.this,clothType);
+        ClothDetailAdapter clothDetailAdapter = new ClothDetailAdapter(ClothDetailActivity.this, clothType);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ClothDetailActivity.this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(clothDetailAdapter);

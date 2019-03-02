@@ -29,16 +29,16 @@ public class BugReportActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-       final TextView bugText=findViewById(R.id.BUG_TEXT);
-        Button sendBugBtn=findViewById(R.id.SEND_BUG_BTN);
+        final TextView bugText = findViewById(R.id.BUG_TEXT);
+        Button sendBugBtn = findViewById(R.id.SEND_BUG_BTN);
         sendBugBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String bugStr=bugText.getText().toString().trim();
-                if(bugStr.equals("")){
-                    AlterUtil.makeAlter(BugReportActivity.this,"请输入您的问题后再提交");
-                }else{
-                    HttpService.sendBug(BugReportActivity.this,bugStr);
+                final String bugStr = bugText.getText().toString().trim();
+                if (bugStr.equals("")) {
+                    AlterUtil.makeAlter(BugReportActivity.this, "请输入您的问题后再提交");
+                } else {
+                    HttpService.sendBug(BugReportActivity.this, bugStr);
                 }
 
             }

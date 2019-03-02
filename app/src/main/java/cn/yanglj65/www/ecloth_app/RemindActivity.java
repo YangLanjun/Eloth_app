@@ -21,26 +21,26 @@ public class RemindActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_remind);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Button back=findViewById(R.id.BACKREMIND);
+        Button back = findViewById(R.id.BACKREMIND);
         ToolUtil.setButtonImageLeft(back);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final Intent intent=new Intent(RemindActivity.this,SettingActivity.class);
+                final Intent intent = new Intent(RemindActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
-        Switch remindSwitch=findViewById(R.id.REMIND_SWITCH);
+        Switch remindSwitch = findViewById(R.id.REMIND_SWITCH);
         remindSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences sp=getSharedPreferences("settings", Context.MODE_PRIVATE);
-                if(isChecked){
-                    sp.edit().putBoolean("showRemind",true).apply();
-                    SettingUtil.showRemind=true;
-                }else{
-                    sp.edit().putBoolean("showRemind",false).apply();
-                    SettingUtil.showRemind=false;
+                SharedPreferences sp = getSharedPreferences("settings", Context.MODE_PRIVATE);
+                if (isChecked) {
+                    sp.edit().putBoolean("showRemind", true).apply();
+                    SettingUtil.showRemind = true;
+                } else {
+                    sp.edit().putBoolean("showRemind", false).apply();
+                    SettingUtil.showRemind = false;
                 }
             }
         });

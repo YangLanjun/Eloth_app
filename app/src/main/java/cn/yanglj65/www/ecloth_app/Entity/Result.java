@@ -2,7 +2,7 @@ package cn.yanglj65.www.ecloth_app.Entity;
 
 import java.io.Serializable;
 
-public class Result implements Serializable{
+public class Result implements Serializable {
     private int errCode;
     private String msg;
     private Object data;

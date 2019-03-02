@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 
 public class AlterUtil {
-    public static void makeAlter(Context context,String msg){
+    public static void makeAlter(Context context, String msg) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
         alertDialogBuilder.setMessage(msg);
         alertDialogBuilder.setPositiveButton("确定", positiveClick);
